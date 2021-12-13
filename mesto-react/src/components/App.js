@@ -1,13 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Header from './Header';
 
 function App() {
   return (
-    <div className="App">
-      <body className="root">
-  <header className="header">
-    <img className="logo" src="./image/logo.svg" alt="Логотип" />
-  </header>
+    
+  <div className="root">
+      <Header />
 
   <main className="content">
     <section className="profile">
@@ -104,8 +102,8 @@ function App() {
     </div>
   </div>
 
-  <div class="popup popup_avatar">
-    <div class="popup__container">
+  <div className="popup popup_avatar">
+    <div className="popup__container">
       <button className="popup__close popup__close_avatar" type="button"></button>
       <form name="avatar" className="popup__form popup__form_avatar" novalidate>
         <h2 className="popup__title">Обновить аватар</h2>
@@ -121,9 +119,8 @@ function App() {
 
 
 
-</body>
-    </div>
-  );
+</div>
+);
 }
 
 export default App;
