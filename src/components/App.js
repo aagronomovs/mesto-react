@@ -4,7 +4,7 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
-import api from './utils/Api';
+//import api from './utils/Api';
 //import Card from './Card';
 
 function App() {
@@ -12,7 +12,6 @@ function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
-  // const [cards, setCards] = React.useState();
   const [selectedCard, setSelectedCard] = React.useState({ name: "", link: "" });
 
   // Подключаем обработчики
@@ -38,38 +37,7 @@ function App() {
     setSelectedCard({ name: "", link: "" });
   }
 
-  //Данные пользователя
-  const [userName, setUserName] = React.useState("");
-  const [userDescription, setUserDescription] = React.useState("");
-  const [userAvatar, setUserAvatar] = React.useState("");
-
-
-
-  //Получаем данные пользователя
-  React.useEffect(() => {
-    api.getUserInfo()
-      .then(data => {
-        setUserName(data.name)
-        setUserDescription(data.about)
-        setUserAvatar(data.avatar)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }, [])
-
-  //Получаем карточки с сервера
-  // React.useEffect(() => {
-  //  api.getCards()
-  //  .then(data => {
-  //    console.log(data);
-  //   setCards(data);
-  //})
-  //.catch(err => {
-  //  console.log(err);
-  //})
-  //}, [])
-
+ 
   return (
 
     <div className="root">
@@ -79,11 +47,7 @@ function App() {
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
         onEditAvatar={handleEditAvatarClick}
-        userAvatar={userAvatar}
-        userDescription={userDescription}
-        userName={userName}
         onCardClick={handleCardClick}
-
       />
       <Footer />
 
