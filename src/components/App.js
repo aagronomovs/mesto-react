@@ -4,7 +4,8 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
-//import api from './utils/Api';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import api from './utils/Api';
 //import Card from './Card';
 
 function App() {
@@ -13,6 +14,8 @@ function App() {
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({ name: "", link: "" });
+  const [currentUser, setCurrentUser] = React.useState({ name: "", avatar: "", about: "", id: "" });
+  
 
   // Подключаем обработчики
   const handleEditProfileClick = () => {
@@ -37,10 +40,25 @@ function App() {
     setSelectedCard({ name: "", link: "" });
   }
 
+    //Получаем данные пользователя
+    React.useEffect(() => {
+      api.getUserInfo()
+          .then(data => {
+              setCurrentUser(data)
+         })
+          .catch(err => {
+              console.log(err)
+          })
+  }, [])
+
+  
+
+
  
   return (
 
     <div className="root">
+      <CurrentUserContext.Provider value={currentUser}>
       <Header />
 
       <Main
@@ -48,6 +66,7 @@ function App() {
         onAddPlace={handleAddPlaceClick}
         onEditAvatar={handleEditAvatarClick}
         onCardClick={handleCardClick}
+        
       />
       <Footer />
 
@@ -106,7 +125,7 @@ function App() {
         <span id="avatar-link-input-error" className="popup__error"></span>
 
       </PopupWithForm>
-
+      </CurrentUserContext.Provider>
     </div>
   );
 }
