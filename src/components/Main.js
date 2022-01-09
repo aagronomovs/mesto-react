@@ -37,6 +37,16 @@ function handleCardLike(card) {
         console.log(err);
     });
 }
+
+function handleCardDelete(card) {
+    api.removeLike(card._id)
+        .then(() => {
+        setCards((state) => state.filter((c) => c._id !== card._id));
+    })
+    .catch(err => {
+        console.log(err);
+    });
+}
    
 
     return (
@@ -67,6 +77,7 @@ function handleCardLike(card) {
                         card={{ name: item.name, link: item.link, likes: item.likes, _id: item._id }}
                         onCardClick={props.onCardClick}
                         onCardLike={handleCardLike}
+                        onCardDelete={handleCardDelete}
                     />
                 ))
                 }

@@ -12,6 +12,10 @@ function Card(props) {
         props.onCardLike(props.card);
     }
 
+    function handleDeleteClick() {
+        props.onCardDelete(props.card);
+    }
+
     // Определяем, являемся ли мы владельцем текущей карточки
         const isOwn = props.owner._id === currentUser._id;
 
@@ -33,7 +37,7 @@ function Card(props) {
 
         <article className="item">
             <img className="item__photo" alt={props.name} src={props.link} onClick={handleCardClick} />
-            <button className={cardDeleteButtonClassName} type="button"></button>
+            <button className={cardDeleteButtonClassName} type="button" onClick={handleDeleteClick}></button>
             <div className="item__wrapper">
                 <h2 className="item__title">{props.name}</h2>
                 <div className="item__like-box">
