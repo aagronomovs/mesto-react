@@ -8,7 +8,8 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import api from './utils/Api';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
-import Card from './Card';
+//import Card from './Card';
+import AddPlacePopup from './AddPlacePopup';
 
 function App() {
   // Стейт состояния попапов
@@ -112,6 +113,17 @@ function handleCardDelete(card) {
   });
 }
 
+function handleAddPlaceSubmit(data) {
+  api.postNewCard(data)
+    .then((newCard) => {
+      setCards([newCard, ...cards]);
+      closeAllPopups();
+    })
+    .catch(err => {
+      console.log(err);
+    })
+}
+
 
  
   return (
@@ -139,22 +151,7 @@ function handleCardDelete(card) {
         onUpdateUser={handleUpdateUser}>
       </EditProfilePopup>
 
-      <PopupWithForm
-        name="add-card"
-        title="Новое место"
-        buttonTitle="Создать"
-        isOpen={isAddPlacePopupOpen}
-        onClose={closeAllPopups} >
-
-        <input id="card-name-input" type="text" className="popup__input popup__input_field_card-name" name="cardName"
-          placeholder="Название" minLength="2" maxLength="30" required />
-        <span id="card-name-input-error" className="popup__error"></span>
-        <input id="card-link-input" type="url" className="popup__input popup__input_field_link" name="cardLink"
-          placeholder="Ссылка на картинку" required />
-        <span id="card-link-input-error" className="popup__error"></span>
-
-      </PopupWithForm>
-
+      <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />
 
       <ImagePopup onClose={closeAllPopups} card={selectedCard} />
 
