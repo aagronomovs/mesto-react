@@ -21,7 +21,7 @@ function Card(props) {
 
     // Создаём переменную, которую после зададим в `className` для кнопки удаления
         const cardDeleteButtonClassName = (
-          `button_delete ${isOwn ? '' : 'button_delete_hidden'}`
+          `button_delete ${isOwn ? 'button_delete' : ''}`
         );
 
     // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
@@ -37,7 +37,7 @@ function Card(props) {
 
         <article className="item">
             <img className="item__photo" alt={props.name} src={props.link} onClick={handleCardClick} />
-            <button className={cardDeleteButtonClassName} type="button" onClick={handleDeleteClick}></button>
+            <button className={cardDeleteButtonClassName} hidden={!isOwn} type="button" onClick={handleDeleteClick}></button>
             <div className="item__wrapper">
                 <h2 className="item__title">{props.name}</h2>
                 <div className="item__like-box">

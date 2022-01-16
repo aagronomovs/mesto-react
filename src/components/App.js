@@ -55,7 +55,7 @@ function App() {
           })
   }, [])
 
-
+//Обновить данные пользователя
   const handleUpdateUser = (data) => {
     api.updateUserInfo(data)
         .then((res) => {
@@ -67,6 +67,8 @@ function App() {
         })
   }
 
+
+  //Обновить аватар
   const handleUpdateAvatar = (avatar) => {
     api.updateAvatar(avatar)
       .then((res) => {
@@ -89,22 +91,29 @@ function App() {
       })
 }, [])
 
-function handleCardLike(card) {
-  // Снова проверяем, есть ли уже лайк на этой карточке
-  const isLiked = card.likes.some(i => i._id === currentUser._id);
+//Ставим лайк
+    function handleCardLike(card) {
+      // Снова проверяем, есть ли уже лайк на этой карточке
+      const isLiked = card.likes.some(i => i._id === currentUser._id);
+      // Отправляем запрос в API и получаем обновлённые данные карточки
+      isLiked 
+      ? api.removeLike(card._id).then((newCard) => {
+          setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+      })
+      .catch(err => {
+          console.error(err);
+      })
+      : api.getLike(card._id).then((newCard) => {
+          setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+      })
+      .catch(err => {
+          console.error(err);
+      });
+  }
   
-  // Отправляем запрос в API и получаем обновлённые данные карточки
-  api.getLike(card._id, !isLiked)
-      .then((newCard) => {
-      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-  })
-  .catch(err => {
-      console.log(err);
-  });
-}
-
+  
 function handleCardDelete(card) {
-  api.removeLike(card._id)
+  api.deleteCard(card._id)
       .then(() => {
       setCards((state) => state.filter((c) => c._id !== card._id));
   })
