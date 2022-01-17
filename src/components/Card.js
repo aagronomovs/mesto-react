@@ -17,20 +17,20 @@ function Card(props) {
     }
 
     // Определяем, являемся ли мы владельцем текущей карточки
-        const isOwn = props.owner._id === currentUser._id;
+    const isOwn = props.owner._id === currentUser._id;
 
     // Создаём переменную, которую после зададим в `className` для кнопки удаления
-        const cardDeleteButtonClassName = (
-          `button_delete ${isOwn ? 'button_delete' : ''}`
-        );
+    const cardDeleteButtonClassName = (
+        `button_delete ${isOwn ? 'button_delete' : ''}`
+    );
 
     // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
-        const isLiked = props.likes.some(i => i._id === currentUser._id);
+    const isLiked = props.likes.some(i => i._id === currentUser._id);
 
     // Создаём переменную, которую после зададим в `className` для кнопки лайка
-        const cardLikeButtonClassName = (
-            `button_like ${isLiked ? 'button_like_active' : ''}`
-          );
+    const cardLikeButtonClassName = (
+        `button_like ${isLiked ? 'button_like_active' : ''}`
+    );
   
 
     return (

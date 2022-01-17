@@ -44,8 +44,8 @@ function App() {
     setSelectedCard({ name: "", link: "" });
   }
 
-    //Получаем данные пользователя
-    React.useEffect(() => {
+  //Получаем данные пользователя
+  React.useEffect(() => {
       api.getUserInfo()
           .then(data => {
               setCurrentUser(data)
@@ -55,7 +55,7 @@ function App() {
           })
   }, [])
 
-//Обновить данные пользователя
+  //Обновить данные пользователя
   const handleUpdateUser = (data) => {
     api.updateUserInfo(data)
         .then((res) => {
@@ -81,8 +81,8 @@ function App() {
   }
   
   //Получаем карточки с сервера
- React.useEffect(() => {
-  api.getCards()
+  React.useEffect(() => {
+    api.getCards()
       .then(cards => {
           setCards(cards);
       })
@@ -91,8 +91,8 @@ function App() {
       })
 }, [])
 
-//Ставим лайк
-    function handleCardLike(card) {
+  //Ставим лайк/удаляем лайк
+  function handleCardLike(card) {
       // Снова проверяем, есть ли уже лайк на этой карточке
       const isLiked = card.likes.some(i => i._id === currentUser._id);
       // Отправляем запрос в API и получаем обновлённые данные карточки
@@ -111,27 +111,29 @@ function App() {
       });
   }
   
-  
-function handleCardDelete(card) {
-  api.deleteCard(card._id)
+  //Удаляем карточку
+  function handleCardDelete(card) {
+    api.deleteCard(card._id)
       .then(() => {
-      setCards((state) => state.filter((c) => c._id !== card._id));
-  })
-  .catch(err => {
-      console.log(err);
-  });
-}
-
-function handleAddPlaceSubmit(data) {
-  api.postNewCard(data)
-    .then((newCard) => {
-      setCards([newCard, ...cards]);
-      closeAllPopups();
+         setCards((state) => state.filter((c) => c._id !== card._id));
     })
     .catch(err => {
       console.log(err);
-    })
-}
+    });
+  }
+
+
+  //Опубликовать новую карточку
+  function handleAddPlaceSubmit(data) {
+    api.postNewCard(data)
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
 
 
  

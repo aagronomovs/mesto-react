@@ -1,21 +1,11 @@
 import React from 'react';
 import Card from './Card';
-//import api from './utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main(props) {
    
     const currentUser = React.useContext(CurrentUserContext);
     
-
-    //Данные пользователя
-  //  const [userName, setUserName] = React.useState("");
-   // const [userDescription, setUserDescription] = React.useState("");
-   // const [userAvatar, setUserAvatar] = React.useState("");
-
- 
-   
-
     return (
         <main className="content">
             <section className="profile">

@@ -3,28 +3,28 @@ import PopupWithForm from './PopupWithForm';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function EditProfilePopup(props) {
-const [name, setName] = React.useState('');
-const [description, setDescription] = React.useState('');
+  const [name, setName] = React.useState('');
+  const [description, setDescription] = React.useState('');
 
-function handleChangeName(e) {
+  function handleChangeName(e) {
     setName(e.target.value);
   }
 
-function handleChangeDescription(e) {
+  function handleChangeDescription(e) {
     setDescription(e.target.value);
-}  
+  }  
 
-// Подписка на контекст
-const currentUser = React.useContext(CurrentUserContext);
+  // Подписка на контекст
+  const currentUser = React.useContext(CurrentUserContext);
 
-// После загрузки текущего пользователя из API
-// его данные будут использованы в управляемых компонентах.
-React.useEffect(() => {
-  setName(currentUser.name);
-  setDescription(currentUser.about);
-}, [currentUser]);
+  // После загрузки текущего пользователя из API
+  // его данные будут использованы в управляемых компонентах.
+  React.useEffect(() => {
+    setName(currentUser.name);
+    setDescription(currentUser.about);
+  }, [currentUser]);
 
-function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
   
     // Передаём значения управляемых компонентов во внешний обработчик
@@ -34,7 +34,7 @@ function handleSubmit(e) {
     });
   }
 
-    return (
+  return (
     <PopupWithForm
         name="edit-profile"
         title="Редактировать профиль"
@@ -66,8 +66,8 @@ function handleSubmit(e) {
                onChange={handleChangeDescription} />
         <span id="userform-job-input-error" className="popup__error"></span>
 
-      </PopupWithForm>
-    )
+    </PopupWithForm>
+  )
 } 
 
 export default EditProfilePopup;

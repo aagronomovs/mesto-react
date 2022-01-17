@@ -3,28 +3,27 @@ import PopupWithForm from './PopupWithForm';
 
 
 function AddPlacePopup(props) {
- const [name, setName] = React.useState('');
-const [link, setLink] = React.useState('');
+  const [name, setName] = React.useState('');
+  const [link, setLink] = React.useState('');
 
-function handleChangeName(e) {
+  function handleChangeName(e) {
     setName(e.target.value);
   }
 
-function handleChangeLink(e) {
+  function handleChangeLink(e) {
     setLink(e.target.value);
-}  
+  }  
 
-    function handleSubmit(e) {
-        e.preventDefault();
-      
-        // Передаём значения управляемых компонентов во внешний обработчик
-        props.onAddPlace({
-          name,
-          link
-        });
-      }
+  function handleSubmit(e) {
+    e.preventDefault();
+       // Передаём значения управляемых компонентов во внешний обработчик
+      props.onAddPlace({
+        name,
+        link
+      });
+  }
 
-    return (
+  return (
     <PopupWithForm
         name="add-card"
         title="Новое место"
