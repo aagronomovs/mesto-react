@@ -5,7 +5,7 @@ import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import api from './utils/Api';
+import api from '../utils/Api';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 //import Card from './Card';
@@ -89,7 +89,7 @@ function App() {
       .catch(err => {
           console.log(err);
       })
-}, [])
+  }, [])
 
   //Ставим лайк/удаляем лайк
   function handleCardLike(card) {
